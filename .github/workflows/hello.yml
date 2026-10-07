@@ -1,4 +1,4 @@
-name: Jobs Practice
+name: Steps Practice
 
 on:
   push:
@@ -8,12 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test
-        run: echo "Testing application"
-
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Build
-        run: echo "Building application"
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Show files
+        run: ls
+      
+      - name : Show Messages
+        run : echo "HI friends"
