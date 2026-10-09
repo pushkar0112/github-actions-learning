@@ -11,8 +11,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Show files
-        run: ls
+      - name: System Information
+        run : |
+             echo "User Information"
+             uname -a
+             echo "Current Directory"
+             pwd
+             echo "List files"
+             ls
       
-      - name : Show Messages
-        run : echo "HI friends"
+      - name : Version Check
+        run : |
+             git --version
+             docker --version
+             python --version
+
