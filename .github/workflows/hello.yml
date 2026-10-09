@@ -1,28 +1,23 @@
-name: Steps Practice
+name: Environment Practice
 
 on:
   push:
+
+env:
+  APP_NAME: my-app
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      - name: System Information
-        run : |
-             echo "User Information"
-             uname -a
-             echo "Current Directory"
-             pwd
-             echo "List files"
-             ls
-      
-      - name : Version Check
-        run : |
-             git --version
-             docker --version
-             python --version
+    env:
+      ENVIRONMENT: development
 
+    steps:
+      - name: Show variables
+        env:
+          VERSION: "1.0"
+        run: |
+          echo "App Name: $APP_NAME"
+          echo "Environment: $ENVIRONMENT"
+          echo "Version: $VERSION"
