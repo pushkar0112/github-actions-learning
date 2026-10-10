@@ -1,4 +1,4 @@
-name: Secrets Practice
+name: Job Dependencies
 
 on:
   push:
@@ -8,9 +8,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Use secret
-        env:
-          MY_SECRET: ${{ secrets.MY_SECRET }}
-        run: |
-          echo "Secret exists"
-          echo "Secret length: ${#MY_SECRET}"
+      - name: Run tests
+        run: echo "Running tests..."
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build application
+        run: echo "Building application..."
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy application
+        run: echo "Deploying application..."
