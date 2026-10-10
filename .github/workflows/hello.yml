@@ -1,4 +1,4 @@
-name: Job Dependencies
+name: Real CI Pipeline
 
 on:
   push:
@@ -8,7 +8,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run tests
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show files
+        run: |
+          echo "Repository files:"
+          ls
+
+      - name: Run test
         run: echo "Running tests..."
 
   build:
@@ -16,6 +24,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Build application
         run: echo "Building application..."
 
@@ -24,5 +35,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Deploy application
         run: echo "Deploying application..."
