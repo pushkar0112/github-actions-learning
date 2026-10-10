@@ -1,23 +1,16 @@
-name: Environment Practice
+name: Secrets Practice
 
 on:
   push:
-
-env:
-  APP_NAME: my-app
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
-    env:
-      ENVIRONMENT: development
-
     steps:
-      - name: Show variables
+      - name: Use secret
         env:
-          VERSION: "1.0"
+          MY_SECRET: ${{ secrets.MY_SECRET }}
         run: |
-          echo "App Name: $APP_NAME"
-          echo "Environment: $ENVIRONMENT"
-          echo "Version: $VERSION"
+          echo "Secret exists"
+          echo "Secret length: ${#MY_SECRET}"
