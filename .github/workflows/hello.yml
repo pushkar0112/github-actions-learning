@@ -16,11 +16,19 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Check Python version
-        run: python --version
-
-      - name: Install pytest
-        run: pip install pytest
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
       - name: Run tests
         run: pytest
+
+      - name: Create test report
+        run: |
+          echo "Tests completed successfully" > test-report.txt
+          echo "Application: Python CI" >> test-report.txt
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: test-report.txt
