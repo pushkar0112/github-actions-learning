@@ -1,17 +1,27 @@
-name: Context Practice
+name: Manual Deployment
 
 on:
-  push:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Choose environment"
+        required: true
+        default: "development"
+        type: choice
+        options:
+          - development
+          - staging
+          - production
 
 jobs:
-  info:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show GitHub information
+      - name: Show environment
         run: |
-          echo "Repository: ${{ github.repository }}"
-          echo "Branch: ${{ github.ref_name }}"
-          echo "Commit: ${{ github.sha }}"
-          echo "Actor: ${{ github.actor }}"
-          echo "Event: ${{ github.event_name }}"
+          echo "Selected environment: ${{ inputs.environment }}"
+
+      - name: Deploy
+        run: |
+          echo "Deploying to ${{ inputs.environment }}"
