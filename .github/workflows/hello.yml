@@ -1,23 +1,17 @@
-name: Conditions Practice
+name: Context Practice
 
 on:
   push:
 
 jobs:
-  test:
+  info:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run tests
-        run: echo "Tests passed"
-
-      - name: Build
-        if: success()
-        run: echo "Building application"
-
-      - name: Deploy
-        if: github.ref == 'refs/heads/main'
-        run: echo "Deploying to production"
+      - name: Show GitHub information
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Event: ${{ github.event_name }}"
