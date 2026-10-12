@@ -1,27 +1,23 @@
-name: Manual Deployment
+name: Docker CI
 
 on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: "Choose environment"
-        required: true
-        default: "development"
-        type: choice
-        options:
-          - development
-          - staging
-          - production
+  push:
+    branches:
+      - main
 
 jobs:
-  deploy:
+  docker:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Show environment
-        run: |
-          echo "Selected environment: ${{ inputs.environment }}"
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Deploy
-        run: |
-          echo "Deploying to ${{ inputs.environment }}"
+      - name: Build Docker image
+        run: docker build -t my-python-app:latest .
+
+      - name: Check Docker image
+        run: docker images
+
+      - name: Run Docker container
+        run: docker run --rm my-python-app:latest
